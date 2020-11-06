@@ -4,24 +4,21 @@ const DoneNotesList = document.querySelector('.DoneUnorderedlist');
 const ToDoHeading = document.querySelector('.ToDoHeading');
 const DoneHeading = document.querySelector('.DoneHeading');
 const ColorPicker = document.querySelector('.ColorPicker');
-const Notes = [];
-const DoneTasks = [];
+const Notes = JSON.parse(localStorage.getItem('PendingNotes')) || [];
+const DoneTasks = JSON.parse(localStorage.getItem('DoneTasks')) || [];
 
 function HandleSubmission(e) {
   e.preventDefault();
   const Text = this.querySelector('[name="item"]').value;
   const TaskColor = this.querySelector('[name="color"]').value;
-  const TaskId = Date.now();
-  console.log('TaskId: ', TaskId, 'Task Color : ', TaskColor);
+  console.log('Task Color : ', TaskColor);
   if (Text !== '') {
     const Note = {
-      Id: TaskId,
       Text,
-      Done: false,
       BackgroundColor: TaskColor,
     };
     Notes.push(Note);
-    //localStorage.setItem('Notes', JSON.stringify(Notes));
+    localStorage.setItem('PendingNotes', JSON.stringify(Notes));
     PopulateToDoList(Notes, ToDoNotesList);
     this.reset();
   } else {
@@ -33,13 +30,17 @@ function HandleClick(event) {
   var ElementClicked;
   var Index;
   if (!event.target.matches('path') && !event.target.matches('svg')) return;
-  if (event.target.matches('[id=DeleteIcon]')) {
-    ElementClicked = event.target;
-    Index = ElementClicked.dataset.index;    
-    delete Notes[Index];    
-    PopulateToDoList(Notes, ToDoNotesList);
-    delete DoneTasks[Index];
-    PopulateDoneList(DoneTasks,DoneNotesList);
+  if (event.target.closest('.trashcan-icon')) {
+    Index = event.target.dataset.index;
+    if (event.target.closest('.to-do-list-flexbox')) {
+      delete Notes[Index];
+      localStorage.setItem('PendingNotes', JSON.stringify(Notes));
+      PopulateToDoList(Notes, ToDoNotesList);
+    } else if (event.target.closest('.done-list-flexbox')) {
+      delete DoneTasks[Index];
+      localStorage.setItem('DoneTasks', JSON.stringify(DoneTasks));
+      PopulateDoneList(DoneTasks, DoneNotesList);
+    }
     if (DoneNotesList.childElementCount == 0) {
       DoneHeading.style['visibility'] = 'hidden';
     }
@@ -52,21 +53,23 @@ function HandleClick(event) {
     console.log('Index: ', Index);
     DoneTasks.push(Notes[Index]);
     delete Notes[Index];
+    localStorage.setItem('PendingNotes', JSON.stringify(Notes));
+    localStorage.setItem('DoneTasks', JSON.stringify(DoneTasks));
     PopulateToDoList(Notes, ToDoNotesList);
+    PopulateDoneList(DoneTasks, DoneNotesList);
     if (ToDoNotesList.childElementCount == 0) {
       ToDoHeading.style['visibility'] = 'hidden';
     }
-    PopulateDoneList(DoneTasks, DoneNotesList);
-    
   }
 }
 
 function PopulateToDoList(Notes, ToDoNotesList) {
   console.log('Items : ', ToDoNotesList.childElementCount);
-    ToDoNotesList.innerHTML = Notes.map((Note, i) => {
+  ToDoNotesList.innerHTML = Notes.map((Note, i) => {
+    if (Note != null) {
       return `
       <div class="to-do-list-flexbox" style="background:${Note.BackgroundColor}">
-      <div for="Note${i}" class="to-do-item">${Note.Text}</div>
+      <div class="to-do-item">${Note.Text}</div>
       <!--Adding icons for interaction -->
       <div class="trashcan-icon">
       <svg
@@ -110,7 +113,8 @@ function PopulateToDoList(Notes, ToDoNotesList) {
       </div>
     </div>
       `;
-    }).join('');
+    }
+  }).join('');
   if (ToDoNotesList.childElementCount !== 0) {
     ToDoHeading.style['visibility'] = 'visible';
   }
@@ -119,9 +123,10 @@ function PopulateToDoList(Notes, ToDoNotesList) {
 function PopulateDoneList(Notes, DoneNotesList) {
   console.log('Item: ', Notes);
   DoneNotesList.innerHTML = Notes.map((Note, i) => {
+    if (Note != null) {
       return `
-      <div class="to-do-list-flexbox" style="background:${Note.BackgroundColor}">
-      <div for="Note${i}" class="to-do-item">${Note.Text}</div>
+      <div class="done-list-flexbox" style="background:${Note.BackgroundColor}">
+      <div class="to-do-item">${Note.Text}</div>
       <!--Adding icons for interaction -->
       <div class="trashcan-icon">
       <svg
@@ -157,6 +162,7 @@ function PopulateDoneList(Notes, DoneNotesList) {
         </div>
     </div>
       `;
+    }
   }).join('');
   if (DoneNotesList.childElementCount !== 0) {
     DoneHeading.style['visibility'] = 'visible';
