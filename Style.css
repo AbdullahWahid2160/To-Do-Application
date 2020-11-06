@@ -1,0 +1,211 @@
+body, input, button {
+    font-family: 'Lato', sans-serif;
+  }
+  
+  body {
+    background-color: #edf0f1;
+  }
+  
+  header {
+    background-color: #24C3B7;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0px 5px 6px rgba(1, 12, 11, 0.15);
+  }
+  
+  h1 {
+    margin: 10px 0px 0px 0px;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    color: #052928;
+    padding: 15px;
+  }
+  
+  p {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 10px 45px;
+    padding: 10px 0px;
+    color: #052928;
+    visibility: hidden;
+  }
+
+  p .ToDoHeading{
+    visibility: hidden;
+  }
+
+  p .DoneHeading{
+    visibility: hidden;
+  }
+  
+  /*Setting up the grid container to accommodate 1 column and several rows*/
+  .grid-container {
+    flex-direction: row;
+    border-radius: 25px;
+    background-color: #23736D;
+  }
+  
+  /*Setting the placement of the activity input field*/
+  .input-flexbox {
+      flex-direction: column;
+      margin: 10px 120px 10px 120px;
+      display: flex;
+      margin-bottom: -5px;
+      margin-top: 1rem;
+  }
+  
+  /*Styling the activity input field*/
+  .input-field {
+    flex: 10%;
+    align-self: center;
+    padding: 20px 50px 20px 0px;
+    margin: 10px 0px 10px 0px;
+    border-radius: 10px;
+    height: 40px;
+    background: rgba(255,255,255, 0.2);
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .container{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+  }
+  
+  /*Styling the activity input text's placement, size and etc.*/
+  input {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+    color: #fff;
+    background: rgba(255,255,255, 0);
+    text-indent: 50px;
+    font-size: 30px;
+  }
+  
+  /*Overriding the default input text color*/
+  ::placeholder { 
+    color: white;
+    opacity: 0.70;
+  } 
+  
+  /*Styling the buttons white circular shape and placing it correctly*/
+  .add-button-background {
+    align-self: center;
+    justify-content: center;
+    transform: translateX(-30px);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    border: 0px;
+    box-shadow: 0px 5px 6px rgba(1, 12, 11, 0.15);
+    outline: none;
+    cursor: pointer;
+  }
+  
+  /*Styling the cross on the button and placing it correctly*/
+  .add-button {
+    position: relative;
+    margin: 10px 0px 0px 10px;
+    width: 40px;
+    height: 40px;
+    fill: rgba(111, 111, 111, 0.8);
+  }
+  .add-button input{
+      position: absolute;
+      z-index: 5;
+  }
+  .add-button .image{
+      position: absolute;
+      z-index: 1;
+  }
+
+  .ColorPickerContainer{
+    display: flex;
+      margin-bottom: -5px;
+      margin-top: 1rem;
+      align-items: center;
+  }
+
+  h3{
+    flex: 25%;
+      color: azure;
+      font-size: x-large;
+      text-align: center;
+  }
+
+  .ColorPicker{
+    flex: 90%;
+    border-radius: 1rem;  
+    height: 4rem;
+  }
+
+  
+  /*Styling the flexboxes and ensuring proper placement*/
+  .to-do-list-flexbox, .done-list-flexbox {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px 10px;
+    margin: 5px 45px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  
+  /*Styling the items in the flexboxes and ensuring proper placement*/
+  .to-do-item, .done-item { 
+    align-self: center;
+    margin: 0px 0px 0px 35px;
+    font-size: 26px;
+    flex: 1;
+  }
+  
+  /*Styling the icon in the flexboxes and ensuring proper placement*/
+  .trashcan-icon {
+    margin: 0px 15px;
+    width: 40px;
+    height: 40px;
+    fill: rgba(111, 111, 111, 0.8);
+    cursor: pointer;
+  }
+  
+  /*Styling the icons in the flexboxes and ensuring proper placement*/
+  .done-unfilled-icon, .done-filled-icon {
+    margin: 0px 15px;
+    width: 40px;
+    height: 40px;
+    fill: rgba(21, 69, 67, 0.8);
+    cursor: pointer;
+  }
+  
+  /*Adding fill effect when hovering with the mouse on the button*/
+  .add-button:hover {
+    fill: rgba(50, 170, 165, 0.8);
+  }
+  
+  .trashcan-icon:hover {
+    fill: rgba(172, 46, 49, 0.8);
+  }
+  
+  .done-unfilled-icon:hover {
+    fill: rgba(50, 170, 165, 0.8);
+  }
+  
+  
+  footer {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 10px;
+  }
+  

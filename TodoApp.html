@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Todo-App</title>
+
+    <!-- Lato font embed-->
+    <link href="TodoApp.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!--Using a grid container with 1 column -->
+    <section class="grid-container">
+      <header>
+        <h1>Your To-Do List</h1>
+      </header>
+
+      <!--Using a row flexbox for text input & button -->
+      <form class="input-flexbox">
+        <div class="ColorPickerContainer">
+          <h3>Pick a Background Color for the Note!</h3>
+          <input type="color" name="color" class="ColorPicker" value="#c0b9b9" required />
+        </div>
+        <div class="container">
+          <div class="input-field">
+            <input type="text" name="item" placeholder="Enter Task" />
+          </div>
+          <div class="add-button-background">
+            <div class="add-button">
+              <input type="submit" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512
+                            512"
+              >
+                <path
+                  class="image"
+                  d="M416
+                                277.333H277.333V416h-42.666V277.333H96v-42.666h138.667V96h42.666v138.667H416v42.666z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <p class="ToDoHeading">To-Do</p>
+
+      <!--Using a row flexbox for To-Do-list items -->
+      <ul class="ToDoUnorderedlist">
+        <div class="to-do-list-flexbox"></div>
+      </ul>
+
+      <p class="DoneHeading">Done</p>
+      <!--Using a row flexbox for done items -->
+      <ul class="DoneUnorderedlist">
+        <div class="done-list-flexbox"></div>
+      </ul>
+      <footer>
+        <br />
+      </footer>
+    </section>
+    <script src="TodoApp.js"></script>
+  </body>
+</html>
